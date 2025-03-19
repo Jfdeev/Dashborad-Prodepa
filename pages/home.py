@@ -56,9 +56,22 @@ layout = dbc.Container([
     ], className="mb-4"),
     dbc.Row([
         dbc.Col(dcc.Graph(id="grafico"), width=12)
+    ]),
+    dbc.Row([
+        dbc.Col([
+            html.Button("Ir para Análises", id="analises-btn", className="btn btn-primary", n_clicks=0),
+            dcc.Location(id="analises-redirect", refresh=True)
+        ], width=12)
+    ], className="mt-4"),
+    dbc.Row([
+        dbc.Col(
+            html.P("Desenvolvido por Prodepa - 2025", className="text-center"),
+            width=12
+        )
     ])
 ])
 
+# Callback para atualizar o gráfico
 @dash.callback(
     Output("grafico", "figure"),
     Input("tipo_grafico", "value"),
@@ -90,3 +103,14 @@ def update_graph(tipo_grafico, tipo_visualizacao, theme_switch):
     
     fig.update_layout(template=theme)
     return fig
+
+# Callback para navegação: ao clicar no botão, redireciona para a página de análises
+@dash.callback(
+    Output("analises-redirect", "pathname"),
+    Input("analises-btn", "n_clicks"),
+    prevent_initial_call=True
+)
+def navigate_to_analises(n_clicks):
+    if n_clicks:
+        return "/analises"
+    return dash.no_update
