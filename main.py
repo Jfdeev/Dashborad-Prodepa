@@ -19,15 +19,14 @@ app.layout = html.Div([
 
 # Callback para verificar o login e redirecionar, se necessário
 @app.callback(
-    Output("page-content", "children"),
-    Input("url", "pathname"),
-    Input("login-status", "data")
+    Output("url", "pathname"),
+    Input("login-status", "data"),
+    prevent_initial_call=True
 )
-def display_page(pathname, login_status):
-    # Se o usuário tentar acessar páginas protegidas sem estar autenticado, redireciona para /login
-    if pathname in ["/", "/analises"] and not login_status:
-        return dcc.Location(pathname="/login", id="redirect")
-    return dash.page_container
+def redirect_login(login_status):
+    if not login_status:
+        return "/login"
+    return dash.no_update
 
 if __name__ == '__main__':
     app.run_server(debug=True, port=8050)

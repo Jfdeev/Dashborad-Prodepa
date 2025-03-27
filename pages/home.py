@@ -17,8 +17,11 @@ df = pd.read_csv("prodepa.pae.csv")
 
 layout = dbc.Container([
     dbc.Row([
-        dbc.Col(html.H1("Dashboard Prodepa", className="text-center mb-4"), width=10),
-        dbc.Col(ThemeSwitchAIO(aio_id="theme-switch", themes=[dbc.themes.LUX, dbc.themes.DARKLY]), width=2)
+        dbc.Col(html.Img(src="../assets/logo.svg", className="img-fluid"), width=12),
+    ]),
+    dbc.Row([
+        dbc.Col(html.H1("Dashboard Prodepa", className="mb-4"), width=8),
+        dbc.Col(ThemeSwitchAIO(aio_id="theme-switch", themes=[dbc.themes.LUX, dbc.themes.DARKLY]), width=2),
     ]),
     dbc.Row([
         dbc.Col([
@@ -80,7 +83,6 @@ layout = dbc.Container([
 )
 def update_graph(tipo_grafico, tipo_visualizacao, theme_switch):
     theme = theme_light if theme_switch else theme_dark
-    # Cria um DataFrame com a contagem dos valores selecionados
     df_counts = df[tipo_grafico].value_counts().reset_index()
     df_counts.columns = [tipo_grafico, "Quantidade"]
     
