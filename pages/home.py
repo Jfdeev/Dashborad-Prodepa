@@ -36,7 +36,8 @@ layout = dbc.Container([
                     {"label": "Sistema PAE", "value": "SISTEMA PAE"}
                 ],
                 value="Andamento",
-                clearable=False
+                clearable=False,
+                className="custom-dropdown"
             )
         ], width=6),
         dbc.Col([
@@ -53,7 +54,8 @@ layout = dbc.Container([
                     {"label": "Gráfico de Funil", "value": "funnel"}
                 ],
                 value="bar",
-                clearable=False
+                clearable=False,
+                className="custom-dropdown"
             )
         ], width=6)
     ], className="mb-4"),
@@ -62,13 +64,13 @@ layout = dbc.Container([
     ]),
     dbc.Row([
         dbc.Col([
-            html.Button("Ir para Análises", id="analises-btn", className="btn btn-primary", n_clicks=0),
+            html.Button("Ir para Análises", id="analises-btn", className="custom-button", n_clicks=0),
             dcc.Location(id="analises-redirect", refresh=True)
         ], width=12)
     ], className="mt-4"),
     dbc.Row([
         dbc.Col(
-            html.P("Desenvolvido por Prodepa - 2025", className="text-center"),
+            html.P("Desenvolvido por Prodepa - 2025", className="custom-footer"),
             width=12
         )
     ])

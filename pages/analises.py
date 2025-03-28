@@ -13,7 +13,7 @@ layout = dbc.Container([
         dbc.Col(html.Img(src="../assets/logo.svg", className="img-fluid", style={"height": "60px"}), width=2),
         dbc.Col(html.H2("Painel de Análises Contratuais", className="text-primary mt-2"), width=8),
         dbc.Col(dbc.Button("Voltar à Home", href="/", color="primary", className="mt-2"), width=2)
-    ], className="mb-4 border-bottom"),
+    ], className="mb-4 border-bottom pb-2"),
     
     # Linha de introdução
     dbc.Row([
@@ -118,10 +118,12 @@ layout = dbc.Container([
                     figure={
                         'data': [{
                             'type': 'table',
-                            'header': {'values': ['Nº PAE', 'Cliente', 'Valor Global']},
+                            'header': {'values': ['Nº PAE', 'Analista', 'Instrumento Contratual', 'Cliente', 'Valor Global']},
                             'cells': {
                                 'values': [
                                     df[df['Status contratual'] == 'vencido']['Nº PAE'].apply(lambda x: '<br>'.join(x.split(','))),
+                                    df[df['Status contratual'] == 'vencido']['Analista'].apply(lambda x: '<br>'.join(x.split(','))),
+                                    df[df['Status contratual'] == 'vencido']['Instrumento Contratual'],
                                     df[df['Status contratual'] == 'vencido']['CLIENTE'].apply(lambda x: '<br>'.join(x.split(','))),
                                     df[df['Status contratual'] == 'vencido']['VALOR GLOBAL']
                                 ],
