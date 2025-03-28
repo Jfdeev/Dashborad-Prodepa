@@ -1,3 +1,4 @@
+import os
 import dash
 import dash_bootstrap_components as dbc
 from dash import html, dcc, Input, Output
@@ -16,7 +17,6 @@ app.layout = html.Div([
     dash.page_container
 ])
 
-
 # Callback para verificar o login e redirecionar, se necessário
 @app.callback(
     Output("url", "pathname"),
@@ -29,4 +29,5 @@ def redirect_login(login_status):
     return dash.no_update
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=8050)
+    port = int(os.environ.get("PORT", 8050))
+    app.run_server(debug=False, host="0.0.0.0", port=port)
